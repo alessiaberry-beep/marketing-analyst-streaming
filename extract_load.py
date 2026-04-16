@@ -222,5 +222,23 @@ def main():
     log.info("Done ✓")
 
 
+def backfill(days: int = 90):
+    end   = date.today() - timedelta(days=1)
+    start = end - timedelta(days=days - 1)
+    current = start
+    while current <= end:
+        log.info(f"Backfilling {current}")
+        raw_rows  = fetch_insights(current)
+        flat_rows = [_flatten(r) for r in raw_rows]
+        if flat_rows:
+            load_to_snowflake(flat_rows, current)
+        current += timedelta(days=1)
+    log.info(f"Backfill complete ✓")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "backfill":
+        backfill()
+    else:
+        main()
