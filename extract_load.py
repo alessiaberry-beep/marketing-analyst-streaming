@@ -32,7 +32,7 @@ SNOWFLAKE_ACCOUNT  = os.environ["SNOWFLAKE_ACCOUNT"]
 SNOWFLAKE_USER     = os.environ["SNOWFLAKE_USER"]
 SNOWFLAKE_PASSWORD = os.environ["SNOWFLAKE_PASSWORD"]
 SNOWFLAKE_DATABASE = os.environ["SNOWFLAKE_DATABASE"]
-SNOWFLAKE_SCHEMA   = os.t("SNOWFLAKE_SCHEMA", "RAW")
+SNOWFLAKE_SCHEMA   = os.environ.get("SNOWFLAKE_SCHEMA", "RAW")
 SNOWFLAKE_WAREHOUSE= os.environ["SNOWFLAKE_WAREHOUSE"]
 
 REPORT_DATE = date.today() - timedelta(days=1)
@@ -103,7 +103,7 @@ INSERT INTO {SNOWFLAKE_DATABASE}.{SNOWFLAKE_SCHEMA}.RAW_META_ADS_INSIGHTS (
 """
 
 
-def _action_val(actions: list | None, action_type: str) -> float:
+def _action_val(actions, action_type: str) -> float:
     if not actions:
         return 0.0
     for a in actions:
@@ -194,6 +194,10 @@ def load_to_snowflake(flat_rows: list[dict], report_date: date) -> None:
         schema=SNOWFLAKE_SCHEMA,
         warehouse=SNOWFLAKE_WAREHOUSE,
     )
+    cur_setup = conn.cursor()
+    cur_setup.execute("CREATE DATABASE IF NOT EXISTS MARKETING_ANALYTICS")
+    cur_setup.execute("CREATE SCHEMA IF NOT EXISTS MARKETING_ANALYTICS.RAW")
+    cur_setup.close()
     cur = conn.cursor()
     try:
         cur.execute(DDL)
