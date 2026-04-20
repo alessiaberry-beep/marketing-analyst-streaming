@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_channel_performance
+    description: "Fact table with daily ad performance metrics by platform"
+    columns:
+      - name: performance_id
+        description: "Surrogate key"
+        tests:
+          - not_null
+          - unique
+      - name: ad_id
+        description: "Ad identifier"
+        tests:
+          - not_null
+      - name: report_date
+        description: "Date of performance data"
+        tests:
+          - not_null
+      - name: spend
+        description: "Amount spent in USD"
+        tests:
+          - not_null
+
+  - name: dim_campaign
+    description: "Campaign and ad set dimension"
+    columns:
+      - name: campaign_id
+        description: "Unique campaign identifier"
+        tests:
+          - not_null
+      - name: ad_id
+        description: "Unique ad identifier"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: "Date dimension with calendar attributes"
+    columns:
+      - name: report_date
+        description: "The date"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_ad
+    description: "Ad dimension with creative and targeting details"
+    columns:
+      - name: ad_id
+        description: "Unique ad identifier"
+        tests:
+          - not_null

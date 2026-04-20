@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw
+    database: MARKETING_ANALYTICS
+    schema: RAW
+    tables:
+      - name: raw_meta_ads_insights
+        description: "Raw Meta Ads Insights data loaded daily from synthetic API"
+        columns:
+          - name: ad_id
+            description: "Unique ad identifier"
+          - name: date_start
+            description: "Report date"
+          - name: spend
+            description: "Amount spent in USD"
+          - name: impressions
+            description: "Number of impressions"
+          - name: clicks
+            description: "Number of clicks"
+          - name: purchases
+            description: "Number of subscription conversions"

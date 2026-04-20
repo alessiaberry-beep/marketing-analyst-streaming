@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_meta_ads_insights
+    description: "Cleaned and typed Meta Ads Insights data"
+    columns:
+      - name: ad_id
+        description: "Unique ad identifier"
+        tests:
+          - not_null
+      - name: report_date
+        description: "Date of the report"
+        tests:
+          - not_null
+      - name: publisher_platform
+        description: "Platform - facebook or instagram"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['facebook', 'instagram']
+      - name: spend
+        description: "Amount spent in USD"
+        tests:
+          - not_null
+      - name: impressions
+        description: "Number of impressions"
+        tests:
+          - not_null
+      - name: purchases
+        description: "Number of subscription conversions"
+        tests:
+          - not_null
