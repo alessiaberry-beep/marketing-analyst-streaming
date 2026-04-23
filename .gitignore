@@ -209,4 +209,6 @@ __marimo__/
 
 
 #Project Requirements 
-project-requirements-README.md
+project-requirements-README.mdtarget/
+logs/
+dbt_packages/
