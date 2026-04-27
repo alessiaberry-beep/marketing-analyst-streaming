@@ -25,6 +25,83 @@ flowchart TD
 
 ---
 
+## Entity Relationship Diagram (ERD)
+
+```mermaid
+erDiagram
+    FCT_CHANNEL_PERFORMANCE {
+        varchar performance_id PK
+        varchar ad_id FK
+        varchar adset_id FK
+        varchar campaign_id FK
+        date report_date FK
+        varchar publisher_platform
+        varchar objective
+        float spend
+        integer impressions
+        integer reach
+        float frequency
+        integer clicks
+        float cpm
+        float cpc
+        float ctr
+        integer purchases
+        float purchase_value
+        float roas
+    }
+
+    DIM_CAMPAIGN {
+        varchar campaign_id PK
+        varchar campaign_name
+        varchar objective
+        varchar adset_id
+        varchar adset_name
+        varchar optimization_goal
+        varchar ad_id FK
+        varchar ad_name
+    }
+
+    DIM_AD {
+        varchar ad_id PK
+        varchar ad_name
+        varchar adset_id
+        varchar adset_name
+        varchar campaign_id
+        varchar campaign_name
+        varchar publisher_platform
+        varchar objective
+    }
+
+    DIM_DATE {
+        date report_date PK
+        integer year
+        integer month
+        integer day
+        varchar day_name
+        varchar month_name
+        integer quarter
+        boolean is_weekend
+        date week_start_date
+        date month_start_date
+    }
+
+    STG_PRESS_RELEASES {
+        varchar press_release_id PK
+        varchar title
+        date published_date
+        varchar url
+        varchar summary
+        text full_text
+        timestamp scraped_at
+    }
+
+    FCT_CHANNEL_PERFORMANCE }o--|| DIM_CAMPAIGN : "ad_id"
+    FCT_CHANNEL_PERFORMANCE }o--|| DIM_AD : "ad_id"
+    FCT_CHANNEL_PERFORMANCE }o--|| DIM_DATE : "report_date"
+```
+
+---
+
 ## Tech Stack
 
 | LSource | Synthetic Meta Ads API (FastAPI) |
