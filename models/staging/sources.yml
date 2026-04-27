@@ -20,3 +20,21 @@ sources:
             description: "Number of clicks"
           - name: purchases
             description: "Number of subscription conversions"
+
+  - name: raw_scrape
+    database: MARKETING_ANALYST
+    schema: RAW
+    tables:
+      - name: raw_press_releases
+        description: "Paramount+ press releases scraped from paramountpressexpress.com"
+        columns:
+          - name: press_release_id
+            description: "Unique identifier for each press release"
+          - name: title
+            description: "Press release title"
+          - name: published_date
+            description: "Date the press release was published"
+          - name: url
+            description: "URL of the press release"
+          - name: full_text
+            description: "Full text content of the press release"

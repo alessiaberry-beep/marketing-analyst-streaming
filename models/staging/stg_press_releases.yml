@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_press_releases
+    description: "Cleaned Paramount+ press releases from web scrape"
+    columns:
+      - name: press_release_id
+        description: "Unique press release identifier"
+        tests:
+          - not_null
+          - unique
+      - name: title
+        description: "Press release title"
+        tests:
+          - not_null
+      - name: published_date
+        description: "Date published"
+      - name: url
+        description: "Source URL"
+        tests:
+          - not_null
+      - name: full_text
+        description: "Full article text"
