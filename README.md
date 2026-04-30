@@ -1,6 +1,8 @@
 # Marketing Analyst Streaming Pipeline
 **LMU ISBA 4715 | Alessia Berry**
 
+🚀 **Live Dashboard:** [paramount-analytics.streamlit.app](https://marketing-analyst-streaming-arsfbp3zzkbjyj6uzymzzt.streamlit.app/)
+
 A end-to-end analytics engineering pipeline that extracts synthetic paid social data modeled after the Meta Ads API, loads it to Snowflake, and transforms it with dbt into a star schema ready for dashboarding.
 
 ---
